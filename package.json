@@ -17,5 +17,13 @@
   },
   "devDependencies": {
     "jest": "^24.8.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joyfullyx/team-profile-gen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joyfullyx/team-profile-gen/issues"
+  },
+  "homepage": "https://github.com/joyfullyx/team-profile-gen#readme"
 }
