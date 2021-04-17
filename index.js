@@ -93,7 +93,7 @@ function askQuestions(questions) {
             case 'manager':
                 inquirer.prompt(managerQuestions).then(response => {                    
                     var manager = new Manager(response.name, response.id, response.email, response.officeNum, answers.role)
-                    console.log(manager)
+                    // console.log(manager)
                     console.log(manager.getOfficeNum());     
                     employeeArr.push(manager)
                     return askQuestions(starterQuestion);
@@ -102,7 +102,7 @@ function askQuestions(questions) {
                 inquirer.prompt(engineerQuestions).then(response =>
                 {
                     var engineer = new Engineer(response.name, response.id, response.email, response.github, answers.role);
-                    console.log(engineer)
+                    // console.log(engineer)
                     console.log(engineer.getGithub());
                     employeeArr.push(engineer);
                     return askQuestions(starterQuestion);
@@ -110,8 +110,8 @@ function askQuestions(questions) {
             case 'intern':
                 inquirer.prompt(internQuestions).then(response => {
                     var intern = new Intern(response.name, response.id, response.email, response.school, answers.role);
-                    console.log(intern)
-                    console.log(intern.getSchool());
+                    // console.log(intern)
+                    console.log(intern.getRole(), intern.getSchool());
                     employeeArr.push(intern);
                     return askQuestions(starterQuestion);
                 })
