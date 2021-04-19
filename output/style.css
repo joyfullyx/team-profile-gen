@@ -3,7 +3,6 @@
 }
 
 #header {
-    text-align: center;
     height: 100px;
     padding-top: 30px;
     color: white;
@@ -12,4 +11,9 @@
 .card-header {
     font-size: 28px;
     color: white;
+}
+
+h1 {
+    text-align: center;
+    height: 100px;
 }

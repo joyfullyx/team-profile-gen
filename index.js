@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
-// const Employee = require('./lib/Employee')
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
@@ -94,26 +93,23 @@ const internQuestions = [
 function addEmployee() {
     inquirer.prompt(starterQuestion)
     .then(answers => {
-        console.log(answers)
+        // console.log(answers)
         switch (answers.role) {
             case 'manager':
-                console.log('I am a manager')
                 addManager();
                 break;
 
             case 'engineer':
-                console.log('I am an engineer')
                 addEngineer();
                 break;
 
             case 'intern':
-                console.log('I am an intern')
                 addIntern();
                 break;
             // write html
             default:
+                console.log('Team Profile successfully generated!')
                 writeFile();
-                // console.log('Thanks for using the team profile generator!')
                 break;
         }
     })
@@ -125,7 +121,6 @@ function addManager() {
    .then(answers => {
        const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNum, answers.role);
        employeeArr.push(manager);
-       console.log(employeeArr); 
        console.log('✓ Manager card successfully generated!')
        addEmployee();
    })
@@ -137,7 +132,6 @@ function addEngineer() {
     .then(answers => {
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github, answers.role);
         employeeArr.push(engineer);
-        console.log(employeeArr);
         console.log('✓ Engineer card successfully generated!')
         addEmployee();
     })
@@ -149,7 +143,6 @@ function addIntern() {
     .then(answers => {
         const intern = new Intern(answers.name, answers.id, answers.email, answers.school, answers.role);
         employeeArr.push(intern);
-        console.log(intern);
         console.log('✓ Intern card successfully generated!')
         addEmployee();
     })
@@ -157,8 +150,8 @@ function addIntern() {
 
 addEmployee();
 
+// write html file when switch case goes to default(no more team members to add)
 const writeFile = () => {
-    // console.log(renderHtml(employeeArr))
     fs.writeFileSync(path.join(__dirname, 'output/teamProfile.html'), finalHtml(employeeArr), 'utf-8');
     console.log(__dirname, './output/teamProfile.html');
 }
