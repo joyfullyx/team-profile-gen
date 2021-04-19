@@ -5,7 +5,7 @@ const path = require('path');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
-const renderHtml = require('./lib/renderHtml');
+const finalHtml = require('./lib/renderHtml');
 const employeeArr = [];
 
 // starter question 
@@ -90,41 +90,6 @@ const internQuestions = [
     }
 ];
 
-// ask questions array based on role type 
-// function askQuestions(questions) {
-//     inquirer
-//     .prompt(questions)
-//     .then(answers => {
-//         switch(answers.role) {
-//             case 'manager':
-//                 inquirer.prompt(managerQuestions).then(response => {                    
-//                     var manager = new Manager(response.name, response.id, response.email, response.officeNum, answers.role)
-//                     // console.log(manager)
-//                     console.log(manager.getOfficeNum());     
-//                     employeeArr.push(manager)
-//                     return askQuestions(starterQuestion);
-//                 })
-//             case 'engineer':
-//                 inquirer.prompt(engineerQuestions).then(response =>
-//                 {
-//                     var engineer = new Engineer(response.name, response.id, response.email, response.github, answers.role);
-//                     // console.log(engineer)
-//                     console.log(engineer.getGithub());
-//                     employeeArr.push(engineer);
-//                     return askQuestions(starterQuestion);
-//                 })
-//             case 'intern':
-//                 inquirer.prompt(internQuestions).then(response => {
-//                     var intern = new Intern(response.name, response.id, response.email, response.school, answers.role);
-//                     // console.log(intern)
-//                     console.log(intern.getRole(), intern.getSchool());
-//                     employeeArr.push(intern);
-//                     return askQuestions(starterQuestion);
-//                 })
-//         }
-//     })
-// }
-
 // questions based on role type
 function addEmployee() {
     inquirer.prompt(starterQuestion)
@@ -161,7 +126,6 @@ function addManager() {
        const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNum, answers.role);
        employeeArr.push(manager);
        console.log(employeeArr); 
-
        console.log('✓ Manager card successfully generated!')
        addEmployee();
    })
@@ -194,5 +158,7 @@ function addIntern() {
 addEmployee();
 
 const writeFile = () => {
-    fs.writeFileSync(path.join(__dirname, './output/teamProfile.html'), renderHtml(employeeArr), 'utf-8');
+    // console.log(renderHtml(employeeArr))
+    fs.writeFileSync(path.join(__dirname, 'output/teamProfile.html'), finalHtml(employeeArr), 'utf-8');
+    console.log(__dirname, './output/teamProfile.html');
 }
