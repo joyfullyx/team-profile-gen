@@ -1,10 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Employee = require('./lib/Employee')
+const path = require('path');
+// const Employee = require('./lib/Employee')
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
-// const { start } = require('repl');
+const renderHtml = require('./lib/renderHtml');
 const employeeArr = [];
 
 // starter question 
@@ -124,18 +125,6 @@ const internQuestions = [
 //     })
 // }
 
-// function addEmployee() {
-//     inquirer.prompt(starterQuestion)
-//         .then(({ role }) => {
-//         console.log(role);
-//         const roleType = new Employee(role);
-//         employeeArr.push(role)
-//         console.log(roleType);
-//         addEmployee();
-//     })
-// }
-// addEmployee();
-
 // questions based on role type
 function addEmployee() {
     inquirer.prompt(starterQuestion)
@@ -156,9 +145,10 @@ function addEmployee() {
                 console.log('I am an intern')
                 addIntern();
                 break;
-
+            // write html
             default:
-                console.log('Thanks for using the team profile generator!')
+                writeFile();
+                // console.log('Thanks for using the team profile generator!')
                 break;
         }
     })
@@ -168,8 +158,10 @@ function addEmployee() {
 function addManager() {
    inquirer.prompt(managerQuestions)
    .then(answers => {
-       const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNum);
+       const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNum, answers.role);
        employeeArr.push(manager);
+       console.log(employeeArr); 
+
        console.log('✓ Manager card successfully generated!')
        addEmployee();
    })
@@ -179,8 +171,9 @@ function addManager() {
 function addEngineer() {
     inquirer.prompt(engineerQuestions)
     .then(answers => {
-        const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+        const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github, answers.role);
         employeeArr.push(engineer);
+        console.log(employeeArr);
         console.log('✓ Engineer card successfully generated!')
         addEmployee();
     })
@@ -190,11 +183,16 @@ function addEngineer() {
 function addIntern() {
     inquirer.prompt(internQuestions)
     .then(answers => {
-        const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
+        const intern = new Intern(answers.name, answers.id, answers.email, answers.school, answers.role);
         employeeArr.push(intern);
+        console.log(intern);
         console.log('✓ Intern card successfully generated!')
         addEmployee();
     })
 }
 
 addEmployee();
+
+const writeFile = () => {
+    fs.writeFileSync(path.join(__dirname, './output/teamProfile.html'), renderHtml(employeeArr), 'utf-8');
+}

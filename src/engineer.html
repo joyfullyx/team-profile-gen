@@ -1,0 +1,11 @@
+<div class="card" id="engineer" style="width: 18rem;">
+    <div class="card-header bg-primary">
+    <h4 id="name">${employee.getName()}</h4>
+    <h5 id="role">${employee.role}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" id="id">ID: ${employee.getId()}</li>
+        <li class="list-group-item" id="email">E-mail: <a href="mailto:${employee.getEmail()}">${employee.getEmail()}</a></li>
+        <li class="list-group-item" id="github">Github: <a href="https://github.com/${employee.getGithub()}" target="_blank">${employee.getGithub()}</a></li>
+    </ul>
+</div>
